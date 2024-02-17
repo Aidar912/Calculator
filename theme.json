@@ -1,0 +1,35 @@
+{
+    "text_entry_line": {
+        "normal_bg": "#FFFFFF",
+        "normal_border": {
+            "colour": "#000000",
+            "width": 2
+        },
+        "active_bg": "#FFFFFF",
+        "active_border": {
+            "colour": "#000000",
+            "width": 2
+        },
+        "disabled_bg": "#FFFFFF",
+        "disabled_border": {
+            "colour": "#FFFFFF",
+            "width": 2
+        },
+        "text": {
+            "normal_colour": "#000000",
+            "disabled_colour": "#000000",
+            "selected_colour": "#000000",
+            "font": {
+                "name": "fira_code",
+                "size": 14,
+                "bold": false,
+                "italic": false
+            },
+            "shadow": {
+                "enabled": false,
+                "colour": "#000000",
+                "offset": [2, 2]
+            }
+        }
+    }
+}
