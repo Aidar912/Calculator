@@ -9,30 +9,36 @@ window_size = (580, 700)
 window = pygame.display.set_mode(window_size)
 pygame.display.set_caption('Калькулятор')
 
-background_color = (255, 255, 255)
-button_color = (100, 180, 255)
+background_color = (30, 30, 30)
+button_color = (45, 45, 45)
 text_color = (255, 255, 255)
-operation_button_color = (0, 0, 255)
-control_button_color = (252, 4, 4)
-special_button_color = (255, 255, 0)
+operation_button_color = (70, 130, 180)
+control_button_color = (220, 20, 60)
+special_button_color = (255, 215, 0)
 
 
 manager = pygame_gui.UIManager(window_size, 'theme.json')
-
-buttons = [
-    {"text": "7", "pos": (50, 200), "type": "digit"}, {"text": "8", "pos": (150, 200), "type": "digit"}, {"text": "9", "pos": (250, 200), "type": "digit"},
-    {"text": "+", "pos": (350, 200), "type": "operation"}, {"text": "%", "pos": (450, 200), "type": "operation"},
-    {"text": "4", "pos": (50, 300), "type": "digit"}, {"text": "5", "pos": (150, 300), "type": "digit"}, {"text": "6", "pos": (250, 300), "type": "digit"},
-    {"text": "-", "pos": (350, 300), "type": "operation"}, {"text": "√", "pos": (450, 300), "type": "special"},
-    {"text": "1", "pos": (50, 400), "type": "digit"}, {"text": "2", "pos": (150, 400), "type": "digit"}, {"text": "3", "pos": (250, 400), "type": "digit"},
-    {"text": "*", "pos": (350, 400), "type": "operation"}, {"text": "^", "pos": (450, 400), "type": "special"},
-    {"text": "C", "pos": (50, 500), "type": "control"}, {"text": "0", "pos": (150, 500), "type": "digit"}, {"text": "=", "pos": (250, 500), "type": "control"},
-    {"text": "/", "pos": (350, 500), "type": "operation"}, {"text": "(", "pos": (450, 500), "type": "operation"},
-    {"text": ")", "pos": (50, 600), "type": "operation"}, {"text": ".", "pos": (150, 600), "type": "digit"}, {"text": "<-", "pos": (450, 600), "type": "control"}
+button_positions = [(x, y) for y in range(200, 601, 100) for x in range(50, 451, 100)]
+button_texts = [
+    "7", "8", "9", "+", "%",
+    "4", "5", "6", "-", "√",
+    "1", "2", "3", "*", "^",
+    "C", "0", "=", "/", "(",
+    ")", ".", "<-"
+]
+button_types = [
+    "digit", "digit", "digit", "operation", "operation",
+    "digit", "digit", "digit", "operation", "special",
+    "digit", "digit", "digit", "operation", "special",
+    "control", "digit", "control", "operation", "operation",
+    "operation", "digit", "control"
 ]
 
-input_box = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((50, 100), (380, 50)), manager=manager)
+buttons = [{"text": text, "pos": pos, "type": btype} for text, pos, btype in zip(button_texts, button_positions, button_types)]
+
+input_box = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect((50, 100), (480, 50)), manager=manager)
 input_box.set_text('')
+
 
 clock = pygame.time.Clock()
 is_running = True
@@ -95,8 +101,10 @@ while is_running:
             button_color = control_button_color
         elif button["type"] == 'special':
             button_color = special_button_color
+
+
         else:
-            button_color = (200, 200, 200)  # Дефолтный цвет для неопределенных типов
+            button_color = (200, 200, 200)
 
         # Отрисовка кнопки с выбранным цветом
         pygame.draw.rect(window, button_color, (button['pos'][0], button['pos'][1], 80, 80))
